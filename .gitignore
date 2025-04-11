@@ -1,0 +1,7 @@
+# Generated server files
+bin/
+client_packages/.listcache
+dotnet
+BugTrap-x64.dll
+linux_x64.tar.gz
+ragemp-server.exe
