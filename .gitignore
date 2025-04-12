@@ -1,7 +1,17 @@
 # Generated server files
 bin/
-client_packages/.listcache
+client_packages/
+packages/
+plugins/
+maps/
 dotnet
 BugTrap-x64.dll
 linux_x64.tar.gz
 ragemp-server.exe
+
+# node
+node_modules/
+dist
+
+# secrets
+.env
