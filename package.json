@@ -1,0 +1,33 @@
+{
+  "name": "ragemp-ts",
+  "version": "0.0.1",
+  "description": "RAGE MP server with TypeScript",
+  "scripts": {
+    "build:production": "rollup -c ./build-scripts/rollup.config.js --environment NODE_ENV:production",
+    "build": "rollup -c ./build-scripts/rollup.config.js",
+    "watch": "rollup -w -c ./build-scripts/rollup.config.js"
+  },
+  "author": "pimpmfl",
+  "license": "MIT",
+  "type": "module",
+  "devDependencies": {
+    "@ragempcommunity/types-client": "2.1.9",
+    "@ragempcommunity/types-server": "2.1.9",
+    "@rollup/plugin-commonjs": "28.0.3",
+    "@rollup/plugin-json": "6.1.0",
+    "@rollup/plugin-node-resolve": "16.0.1",
+    "@rollup/plugin-replace": "6.0.2",
+    "@rollup/plugin-terser": "0.4.4",
+    "@swc/core": "1.11.20",
+    "@swc/helpers": "0.5.17",
+    "@types/node": "22.14.1",
+    "builtin-modules": "5.0.0",
+    "dotenv": "16.5.0",
+    "fs-jetpack": "5.1.0",
+    "rollup": "4.40.0",
+    "rollup-plugin-swc3": "0.12.1",
+    "rollup-plugin-tsconfig-paths": "1.5.2",
+    "rollup-plugin-typescript2": "0.36.0",
+    "typescript": "5.8.3"
+  }
+}

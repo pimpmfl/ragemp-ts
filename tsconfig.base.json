@@ -1,0 +1,17 @@
+{
+  "exclude": ["node_modules", "dist"],
+  "compileOnSave": true,
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "lib": ["ESNext", "DOM"],
+    "rootDir": ".",
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": "./",
+    "skipLibCheck": true,
+    "outDir": "dist"
+  }
+}
