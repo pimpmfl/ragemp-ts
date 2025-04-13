@@ -1,3 +1,3 @@
 // See src/server/README.md
-import "./hello-world/helloWorld";
-import "./hello-world/secondHelloWorld";
+import "./hello-world/hello-world";
+import "./hello-world/second-hello-world";

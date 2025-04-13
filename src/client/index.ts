@@ -1,2 +1,2 @@
 // See src/client/README.md
-import "./hello-world/helloWorld";
+import "./hello-world/hello-world";
