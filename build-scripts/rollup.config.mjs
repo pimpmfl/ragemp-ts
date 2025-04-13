@@ -18,39 +18,15 @@ const buildOutput = "dist";
 const isProduction = process.env.PRODUCTION_MODE === "true";
 const useSWC = process.env.COMPILER_USE_SWC === "true";
 const sourcePath = path.resolve("src");
-const pkgJson = jetpack.read("../package.json", "json");
+// const pkgJson = jetpack.read("../package.json", "json");
 // const localInstalledPackages = [...Object.keys(pkgJson.dependencies)];
 
-/**
- * Resolve given path by fs-jetpack
- */
 function resolvePath(pathParts) {
   return jetpack.path(...pathParts);
 }
 
 /**
- * Generate success console message
- */
-function successMessage(message, type = "Success") {
-  console.log(`[${type}] ${message}`);
-}
-
-/**
- * Generate error console message
- */
-function errorMessage(message, type = "Error") {
-  console.log(`[${type}] ${message}`);
-}
-
-/**
- * Copy given source to destination
- */
-function copy(source, destination, options = { overwrite: true }) {
-  return jetpack.copy(source, destination, options);
-}
-
-/**
- * CleanUp the build output
+ * Remove everything from dist/, except for the files declared in `preserved`
  */
 function cleanUp() {
   if (!jetpack.exists(buildOutput)) {
@@ -79,7 +55,7 @@ function cleanUp() {
 
   removeablePaths.forEach((path) => {
     jetpack.remove(path);
-    errorMessage(path, "Removed");
+    console.log(`[Removed] ${path}`);
   });
 }
 
@@ -105,8 +81,8 @@ function copyFiles() {
   );
 
   prepareForCopy.forEach((item) => {
-    copy(item.from, item.to);
-    successMessage(`${item.from} -> ${item.to}`, "Copied");
+    jetpack.copy(item.from, item.to, { overwrite: true });
+    console.log(`[Copied] ${item.from} -> ${item.to}`);
   });
 }
 
@@ -132,6 +108,7 @@ const generateConfig = (options = {}) => {
     ? resolvePath([buildOutput, "packages", "core", "index.js"])
     : resolvePath([buildOutput, "client_packages", "index.js"]);
 
+  // for future server plugins
   const serverPlugins = [];
   const plugins = [terserMinify];
 
@@ -151,6 +128,7 @@ const generateConfig = (options = {}) => {
     output: {
       file: outputFile,
       format: "cjs",
+      sourcemap: !isProduction,
     },
     plugins: [
       tsPaths({ tsConfigPath }),
@@ -161,11 +139,11 @@ const generateConfig = (options = {}) => {
         ? swc({
             tsconfig: tsConfigPath,
             minify: isProduction,
+            sourceMaps: !isProduction,
             jsc: {
-              target: "es2020",
+              target: "esnext",
               parser: {
                 syntax: "typescript",
-                dynamicImport: true,
                 decorators: true,
               },
               transform: {
@@ -181,10 +159,10 @@ const generateConfig = (options = {}) => {
             check: false,
             tsconfig: tsConfigPath,
           }),
-      isServer ? [...serverPlugins] : null,
+      isServer ? [...serverPlugins] : [],
       ...plugins,
     ],
-    external: isServer ? [...external] : null,
+    external: isServer ? [...external] : [],
   };
 };
 
