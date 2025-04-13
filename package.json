@@ -3,20 +3,18 @@
   "version": "0.0.1",
   "description": "RAGE MP server with TypeScript",
   "scripts": {
-    "build:production": "rollup -c ./build-scripts/rollup.config.js --environment NODE_ENV:production",
-    "build": "rollup -c ./build-scripts/rollup.config.js",
-    "watch": "rollup -w -c ./build-scripts/rollup.config.js"
+    "build:production": "rollup -c ./build-scripts/rollup.config.mjs --environment PRODUCTION_MODE:true",
+    "build": "rollup -c ./build-scripts/rollup.config.mjs",
+    "watch": "rollup -w -c ./build-scripts/rollup.config.mjs"
   },
   "author": "pimpmfl",
   "license": "MIT",
-  "type": "module",
   "devDependencies": {
     "@ragempcommunity/types-client": "2.1.9",
     "@ragempcommunity/types-server": "2.1.9",
     "@rollup/plugin-commonjs": "28.0.3",
     "@rollup/plugin-json": "6.1.0",
     "@rollup/plugin-node-resolve": "16.0.1",
-    "@rollup/plugin-replace": "6.0.2",
     "@rollup/plugin-terser": "0.4.4",
     "@swc/core": "1.11.20",
     "@swc/helpers": "0.5.17",
