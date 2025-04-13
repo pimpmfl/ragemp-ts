@@ -15,6 +15,7 @@
   - [5. Revert the Configuration Change](#5-revert-the-configuration-change)
   - [6. Restore the RAGE MP Client](#6-restore-the-rage-mp-client)
 - [✅ All Done!](#-all-done)
+- [References](#references)
 
 ---
 
@@ -119,3 +120,9 @@ ragemp-server.exe
 ```
 
 - Connect locally using the default IP: `127.0.0.1:22005`
+
+---
+
+### References
+
+- [RAGE MP - Getting Started](https://wiki.rage.mp/wiki/Getting_Started_with_Server)
