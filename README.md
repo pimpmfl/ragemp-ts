@@ -2,11 +2,22 @@
 
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
-![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
-![SWC](https://img.shields.io/badge/SWC-orange?logo=swc&logoColor=white&style=flat-square)
+![Vue](https://img.shields.io/badge/Vue-35495E?style=for-the-badge&logo=vue.js&logoColor=4FC08D)
+![SWC](https://img.shields.io/badge/SWC-orange?logo=swc&logoColor=white&style=for-the-badge)
 <a href="https://rollupjs.org/"><img src="https://rollupjs.org/rollup-logo.svg" width="20" /></a>
 
-> A modern RAGE Multiplayer boilerplate built for developers who want **type-safe**, **modular**, and **maintainable** RAGE Multiplayer projects — with full support for **TypeScript**, **PostgreSQL**, and **React-based CEF**.
+> A modern RAGE Multiplayer boilerplate built for developers who want **type-safe**, **modular**, and **maintainable** RAGE Multiplayer projects — with full support for **TypeScript**, **PostgreSQL**, and **Vue-based CEF**.
+
+---
+
+## 📚 Table of Contents
+
+- [🎯 About This Project](#-about-this-project)
+- [⚡ Quickstart](#-quickstart)
+- [🧱 Project Structure](#-project-structure)
+- [🧰 Build Configuration (Rollup + SWC)](#-build-configuration-rollup--swc)
+- [🚀 Setting Up Your RAGE Multiplayer Server (Windows)](#-setting-up-your-rage-multiplayer-server-windows)
+- [⚙️ Setting Up TypeScript for RAGE Multiplayer](#️-setting-up-typescript-for-rage-multiplayer)
 
 ---
 
@@ -20,7 +31,7 @@ Whether you're just getting started with RAGE MP or looking for a modern setup t
 - 🧩 Modular folder structure with examples
 - 📦 Free and open-source **RAGE MP resources** to learn from and build upon
 - 🛢️ Integration-ready setup for **PostgreSQL** (for storing persistent data)
-- 💻 Support for **React** to build dynamic and maintainable **CEF UIs**
+- 💻 Support for **Vue.js** to build dynamic and maintainable **CEF UIs**
 
 Stay tuned — this project will continue to evolve with more features, examples, and tools to make your RAGE MP development experience smoother.
 
@@ -75,14 +86,6 @@ npm run build
 ```
 
 ✅ The project has been built successfully! You're now ready to start development.
-
----
-
-## 📚 Table of Contents
-
-- [🧰 Build Configuration (Rollup + SWC)](#-build-configuration-rollup--swc)
-- [🚀 Setting Up Your RAGE Multiplayer Server (Windows)](#-setting-up-your-rage-multiplayer-server-windows)
-- [⚙️ Setting Up TypeScript for RAGE Multiplayer](#️-setting-up-typescript-for-rage-multiplayer)
 
 ---
 
@@ -394,8 +397,8 @@ npm install --save-dev @ragempcommunity/types-server
 Create a file at `src/client/hello-world/hello-world.ts`:
 
 ```ts
-mp.events.add("playerReady", () => {
-  mp.gui.chat.push("Hello World! - client");
+mp.events.add('playerReady', () => {
+  mp.gui.chat.push('Hello World! - client');
 });
 ```
 
@@ -404,7 +407,7 @@ mp.events.add("playerReady", () => {
 Create `src/client/index.ts` with the following content:
 
 ```ts
-import "./hello-world/hello-world";
+import './hello-world/hello-world';
 ```
 
 > ⚠️ **Files not imported in the entry point will not be included in the build output.**
@@ -414,8 +417,8 @@ import "./hello-world/hello-world";
 Follow the same structure for server.
 
 ```ts
-mp.events.add("playerReady", (player: PlayerMp) => {
-  player.outputChatBox("Hello World! - server");
+mp.events.add('playerReady', (player: PlayerMp) => {
+  player.outputChatBox('Hello World! - server');
 });
 ```
 
