@@ -5,7 +5,9 @@
   "scripts": {
     "build:production": "rollup -c ./build-scripts/rollup.config.mjs --environment PRODUCTION_MODE:true",
     "build": "rollup -c ./build-scripts/rollup.config.mjs",
-    "watch": "rollup -w -c ./build-scripts/rollup.config.mjs"
+    "watch": "rollup -w -c ./build-scripts/rollup.config.mjs",
+    "format": "prettier --write 'src/**/*.{ts,js,json,md}'",
+    "check-format": "prettier --check 'src/**/*.{ts,js,json,md}'"
   },
   "author": "pimpmfl",
   "license": "MIT",
@@ -22,6 +24,7 @@
     "builtin-modules": "5.0.0",
     "dotenv": "16.5.0",
     "fs-jetpack": "5.1.0",
+    "prettier": "3.5.3",
     "rollup": "4.40.0",
     "rollup-plugin-swc3": "0.12.1",
     "rollup-plugin-tsconfig-paths": "1.5.2",
