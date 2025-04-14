@@ -142,7 +142,7 @@ const generateConfig = (options = {}) => {
             minify: isProduction,
             sourceMaps: !isProduction,
             jsc: {
-              target: "esnext",
+              target: "es2020",
               parser: {
                 syntax: "typescript",
                 decorators: true,
