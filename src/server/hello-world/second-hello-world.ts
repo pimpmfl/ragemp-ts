@@ -1,3 +1,3 @@
-mp.events.add("playerReady", (player: PlayerMp) => {
-  player.outputChatBox("Hello World! - server");
+mp.events.add('playerReady', (player: PlayerMp) => {
+  player.outputChatBox('Hello World! - server');
 });
