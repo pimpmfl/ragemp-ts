@@ -42,14 +42,16 @@ Stay tuned — this project will continue to evolve with more features, examples
 Before starting, make sure you have the following:
 
 - ✅ [Git](https://git-scm.com/downloads) - required to clone the repository
-- ✅ [Node.js (v14 recommended)](https://nodejs.org/en)  
-  It's important to use Node v14 for compatibility with this project. If you're using a version manager like [nvm](https://github.com/nvm-sh/nvm), you can automatically switch to the required Node version by running:
+- ✅ [Node.js (v22 recommended)](https://nodejs.org/en)  
+  It's important to use Node v22 for compatibility with this project. If you're using a version manager like [nvm](https://github.com/nvm-sh/nvm), you can automatically switch to the required Node version by running:
 
   ```bash
   nvm use
   ```
 
   This will use the version specified in the [`.nvmrc`](https://github.com/pimpmfl/ragemp-ts/blob/main/.nvmrc) file located at the root of the project.
+
+  > ⚠️ **Note: RAGE MP currently supports Node v14, so make sure you avoid using features from Node 15 and above when working with the RAGE MP server. For the build steps, linting, and plugins, we still recommend using Node v22. The build target is set to `es2020` to ensure compatibility with both versions.**
 
 ### Steps to Get Started
 
@@ -255,7 +257,7 @@ ragemp-server.exe
 Make sure you have the following installed:
 
 - ✅ [🚀 Setting Up Your RAGE Multiplayer Server (Windows)](#-setting-up-your-rage-multiplayer-server-windows)
-- ✅ [Node.js (v14 recommended for this project)](https://nodejs.org/en)
+- ✅ [Node.js (v22 recommended for this project)](https://nodejs.org/en)
 - ✅ Basic understanding of how Node.js and npm work
 
 ---
