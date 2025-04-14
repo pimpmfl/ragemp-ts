@@ -31,8 +31,8 @@ Stay tuned — this project will continue to evolve with more features, examples
 Before starting, make sure you have the following:
 
 - ✅ [Git](https://git-scm.com/downloads) - required to clone the repository
-- ✅ [Node.js (v22 recommended)](https://nodejs.org/en)  
-  It's important to use Node v22 for compatibility with this project. If you're using a version manager like [nvm](https://github.com/nvm-sh/nvm), you can automatically switch to the required Node version by running:
+- ✅ [Node.js (v14 recommended)](https://nodejs.org/en)  
+  It's important to use Node v14 for compatibility with this project. If you're using a version manager like [nvm](https://github.com/nvm-sh/nvm), you can automatically switch to the required Node version by running:
 
   ```bash
   nvm use
@@ -252,7 +252,7 @@ ragemp-server.exe
 Make sure you have the following installed:
 
 - ✅ [🚀 Setting Up Your RAGE Multiplayer Server (Windows)](#-setting-up-your-rage-multiplayer-server-windows)
-- ✅ [Node.js (v22 recommended for this project)](https://nodejs.org/en)
+- ✅ [Node.js (v14 recommended for this project)](https://nodejs.org/en)
 - ✅ Basic understanding of how Node.js and npm work
 
 ---
@@ -344,10 +344,10 @@ npm install --save-dev @ragempcommunity/types-server
   "exclude": ["node_modules", "dist"],
   "compileOnSave": true,
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
+    "target": "ES2020",
+    "module": "CommonJS",
     "moduleResolution": "node",
-    "lib": ["ESNext", "DOM"],
+    "lib": ["ES2020"],
     "rootDir": ".",
     "strict": true,
     "esModuleInterop": true,
