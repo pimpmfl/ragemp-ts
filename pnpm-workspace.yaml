@@ -1,0 +1,7 @@
+packages:
+  - rage-server-client
+  - rage-cef
+
+onlyBuiltDependencies:
+  - '@swc/core'
+  - esbuild

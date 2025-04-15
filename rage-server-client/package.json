@@ -1,0 +1,44 @@
+{
+  "name": "ragemp-server-client",
+  "version": "0.0.1",
+  "description": "RAGE MP server with TypeScript",
+  "scripts": {
+    "build:production": "rollup -c ./build-scripts/rollup.config.mjs --environment PRODUCTION_MODE:true",
+    "build": "rollup -c ./build-scripts/rollup.config.mjs",
+    "watch": "rollup -w -c ./build-scripts/rollup.config.mjs",
+    "format": "prettier --write 'src/**/*.{ts,js,json,md,vue}'",
+    "check-format": "prettier --check 'src/**/*.{ts,js,json,md,vue}'",
+    "lint": "eslint ."
+  },
+  "author": "pimpmfl",
+  "license": "MIT",
+  "devDependencies": {
+    "@eslint/js": "9.24.0",
+    "@ragempcommunity/types-client": "2.1.9",
+    "@ragempcommunity/types-server": "2.1.9",
+    "@rollup/plugin-commonjs": "28.0.3",
+    "@rollup/plugin-json": "6.1.0",
+    "@rollup/plugin-node-resolve": "16.0.1",
+    "@rollup/plugin-terser": "0.4.4",
+    "@swc/core": "1.11.20",
+    "@swc/helpers": "0.5.17",
+    "@types/node": "22.14.1",
+    "builtin-modules": "5.0.0",
+    "dotenv": "16.5.0",
+    "eslint": "9.24.0",
+    "eslint-config-prettier": "10.1.2",
+    "eslint-plugin-prettier": "5.2.6",
+    "fs-jetpack": "5.1.0",
+    "prettier": "3.5.3",
+    "rollup": "4.40.0",
+    "rollup-plugin-swc3": "0.12.1",
+    "rollup-plugin-tsconfig-paths": "1.5.2",
+    "rollup-plugin-typescript2": "0.36.0",
+    "typescript": "5.8.3",
+    "typescript-eslint": "8.30.0"
+  },
+  "engines": {
+    "node": ">=22.14.0 <23",
+    "npm": ">=10.9.2 <12"
+  }
+}
