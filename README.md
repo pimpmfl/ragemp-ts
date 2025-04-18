@@ -12,7 +12,7 @@
 > A modern RAGE Multiplayer boilerplate built for developers who want **type-safe**, **modular**, and **maintainable** RAGE Multiplayer projects — with full support for **TypeScript**, **PostgreSQL**, and **Vue-based CEF**.
 
 ---
-
+test
 ## 📚 Table of Contents
 
 - [🎯 About This Project](#-about-this-project)
