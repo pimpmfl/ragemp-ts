@@ -19,7 +19,7 @@
     "@rollup/plugin-json": "6.1.0",
     "@rollup/plugin-node-resolve": "16.0.1",
     "@rollup/plugin-terser": "0.4.4",
-    "@swc/core": "1.11.20",
+    "@swc/core": "1.11.21",
     "@swc/helpers": "0.5.17",
     "@types/node": "22.14.1",
     "builtin-modules": "5.0.0",
