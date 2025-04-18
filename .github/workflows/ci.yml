@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  - push
+  - pull_request
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.8.1
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Format
+        run: pnpm run check-format
+
+      - name: Run linter
+        run: pnpm run lint
+
+        # Just a workaround until the build step will be adjusted
+        # when building rage-server-client, the build script tries to find the .env file
+      - name: Create .env
+        run: cp rage-server-client/.env.example rage-server-client/.env
+
+      - name: Build project
+        run: pnpm run build
