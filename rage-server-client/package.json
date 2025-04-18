@@ -6,8 +6,7 @@
     "build:production": "rollup -c ./build-scripts/rollup.config.mjs --environment PRODUCTION_MODE:true",
     "build": "rollup -c ./build-scripts/rollup.config.mjs",
     "watch": "rollup -w -c ./build-scripts/rollup.config.mjs",
-    "format": "prettier --write 'src/**/*.{ts,js,json,md,vue}'",
-    "check-format": "prettier --check 'src/**/*.{ts,js,json,md,vue}'",
+    "check-format": "prettier --check src/ --config .prettierrc",
     "lint": "eslint ."
   },
   "author": "pimpmfl",
