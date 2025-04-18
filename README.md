@@ -6,6 +6,9 @@
 ![SWC](https://img.shields.io/badge/SWC-orange?logo=swc&logoColor=white&style=for-the-badge)
 <a href="https://rollupjs.org/"><img src="https://rollupjs.org/rollup-logo.svg" width="20" /></a>
 
+[![CI](https://github.com/pimpmfl/ragemp-ts/actions/workflows/ci.yml/badge.svg)](https://github.com/pimpmfl/ragemp-ts/actions/workflows/ci.yml)
+
+
 > A modern RAGE Multiplayer boilerplate built for developers who want **type-safe**, **modular**, and **maintainable** RAGE Multiplayer projects — with full support for **TypeScript**, **PostgreSQL**, and **Vue-based CEF**.
 
 ---
