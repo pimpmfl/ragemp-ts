@@ -10,6 +10,7 @@
   ],
   "scripts": {
     "lint": "pnpm -r lint",
-    "build": "pnpm -r build"
+    "build": "pnpm -r build",
+    "check-format": "pnpm -r check-format"
   }
 }

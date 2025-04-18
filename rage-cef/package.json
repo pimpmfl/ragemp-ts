@@ -12,7 +12,7 @@
     "build-only": "vite build",
     "type-check": "vue-tsc --build",
     "lint": "eslint .",
-    "format": "prettier --write src/"
+    "check-format": "prettier --check src/ --config .prettierrc"
   },
   "dependencies": {
     "pinia": "3.0.2",

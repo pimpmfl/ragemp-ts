@@ -1,11 +1,11 @@
-import '../../../assets/main.css'
+import '../../../assets/main.css';
 
-import { createApp } from 'vue'
+import { createApp } from 'vue';
 // import { createPinia } from 'pinia'
-import HelloWorldView from './HelloWorldView.vue'
+import HelloWorldView from './HelloWorldView.vue';
 
-const app = createApp(HelloWorldView)
+const app = createApp(HelloWorldView);
 
 // app.use(createPinia())
 
-app.mount('#app')
+app.mount('#app');
