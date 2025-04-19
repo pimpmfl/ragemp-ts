@@ -12,7 +12,7 @@
   "author": "pimpmfl",
   "license": "MIT",
   "devDependencies": {
-    "@eslint/js": "9.24.0",
+    "@eslint/js": "9.25.0",
     "@ragempcommunity/types-client": "2.1.9",
     "@ragempcommunity/types-server": "2.1.9",
     "@rollup/plugin-commonjs": "28.0.3",
@@ -24,7 +24,7 @@
     "@types/node": "22.14.1",
     "builtin-modules": "5.0.0",
     "dotenv": "16.5.0",
-    "eslint": "9.24.0",
+    "eslint": "9.25.0",
     "eslint-config-prettier": "10.1.2",
     "eslint-plugin-prettier": "5.2.6",
     "fs-jetpack": "5.1.0",
