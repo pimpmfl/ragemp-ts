@@ -36,10 +36,5 @@ jobs:
       - name: Run linter
         run: pnpm run lint
 
-        # Just a workaround until the build step will be adjusted
-        # when building rage-server-client, the build script tries to find the .env file
-      - name: Create .env
-        run: cp rage-server-client/.env.example rage-server-client/.env
-
       - name: Build project
         run: pnpm run build

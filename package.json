@@ -9,6 +9,7 @@
     "rage-cef"
   ],
   "scripts": {
+    "preinstall": "node scripts/enforce-pnpm.js",
     "lint": "pnpm -r lint",
     "build": "pnpm -r build",
     "check-format": "pnpm -r check-format"

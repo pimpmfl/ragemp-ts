@@ -6,13 +6,14 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "preinstall": "node ../scripts/enforce-pnpm.js",
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --build",
     "lint": "eslint .",
-    "check-format": "prettier --check src/ --config .prettierrc"
+    "check-format": "prettier --check src/ --config ../.prettierrc"
   },
   "dependencies": {
     "pinia": "3.0.2",
@@ -34,5 +35,9 @@
     "vite": "6.3.2",
     "vite-plugin-vue-devtools": "7.7.5",
     "vue-tsc": "2.2.8"
+  },
+  "engines": {
+    "node": ">=22.14.0 <23",
+    "pnpm": ">=10.8.1 <11"
   }
 }
