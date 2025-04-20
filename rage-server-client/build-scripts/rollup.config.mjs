@@ -1,167 +1,154 @@
-import jetpack from 'fs-jetpack';
-import path from 'path';
-import { config } from 'dotenv';
-import nodeResolvePlugin from '@rollup/plugin-node-resolve';
-import { swc } from 'rollup-plugin-swc3';
-import jsonPlugin from '@rollup/plugin-json';
-import builtinModules from 'builtin-modules';
-import commonjsPlugin from '@rollup/plugin-commonjs';
+import path from 'node:path';
+import { builtinModules } from 'node:module';
+import { copyFileSync, existsSync, mkdirSync, readdirSync, rmSync, statSync } from 'node:fs';
+import { defineConfig } from 'rollup';
+import commonjs from '@rollup/plugin-commonjs';
+import nodeResolve from '@rollup/plugin-node-resolve';
+import { minimatch } from 'minimatch';
 import tsPaths from 'rollup-plugin-tsconfig-paths';
-import typescriptPlugin from 'rollup-plugin-typescript2';
-import terser from '@rollup/plugin-terser';
-import { fileURLToPath } from 'url';
+import { swc } from 'rollup-plugin-swc3';
 
-config({
-  path: path.resolve('.env')
-});
+const buildScriptsDirectory = path.resolve();
+const rootDirectory = path.resolve(buildScriptsDirectory, '../');
+const buildOutput = path.resolve(rootDirectory, 'dist');
+const sourcePath = path.resolve(rootDirectory, 'rage-server-client/src');
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// These files will not be changed or removed during the build step
+const preserved = [
+  'node_modules/**/*',
+  'ragemp-server*',
+  'BugTrap-x64.dll',
+  'bin/**/*',
+  'dotnet/**/*',
+  'maps/**/*',
+  'plugins/**/*',
+  'client_packages/game_resources/**/*',
+  'client_packages/cef/**/*'
+];
 
-const buildOutput = path.resolve(__dirname, '../../dist');
-const isProduction = process.env.PRODUCTION_MODE === 'true';
-const useSWC = process.env.COMPILER_USE_SWC === 'true';
-const sourcePath = path.resolve('src');
-// const pkgJson = jetpack.read("../package.json", "json");
-// const localInstalledPackages = [...Object.keys(pkgJson.dependencies)];
+const isPathPreserved = (filePath) => {
+  const relativePath = path.relative(buildOutput, filePath).replace(/\\/g, '/');
+  return preserved.some((pattern) => {
+    return minimatch(relativePath, pattern, { matchBase: true, dot: true });
+  });
+};
 
-function resolvePath(pathParts) {
-  return jetpack.path(...pathParts);
-}
+// Iterates through all the files and sub-directories of a given directory
+// It first checks if the file or directory is preserved, if it is, it will be skipped
+// Recursively goes through the contents of the directory and looks for preserved files
+const collectRemovables = (directory) => {
+  let removables = [];
+  for (const entry of readdirSync(directory)) {
+    const fullPath = path.join(directory, entry);
+    const stats = statSync(fullPath);
 
-/**
- * Remove everything from dist/, except for the files declared in `preserved`
- */
-function cleanUp() {
-  if (!jetpack.exists(buildOutput)) {
+    if (isPathPreserved(fullPath)) {
+      continue;
+    }
+
+    if (stats.isDirectory()) {
+      const subRemovables = collectRemovables(fullPath);
+
+      if (subRemovables.length > 0) {
+        removables = removables.concat(subRemovables);
+      }
+    } else {
+      removables.push(fullPath);
+    }
+  }
+
+  return removables;
+};
+
+const cleanUp = () => {
+  if (!existsSync(buildOutput)) {
+    console.error(`Could not find: ${buildOutput}.`);
     return;
   }
 
-  const preserved = [
-    'node_modules/**/*',
-    'ragemp-server*',
-    '.env',
-    'BugTrap-x64.dll',
-    'bin/**/*',
-    'dotnet/**/*',
-    'maps/**/*',
-    'plugins/**/*',
-    'client_packages/game_resources/**/*',
-    'client_packages/package2/**/*',
-    'client_packages/cef/**/*',
-    'pnpm-lock.yaml',
-    'package-lock.json',
-    'yarn.lock'
+  const removables = collectRemovables(buildOutput);
+  removables.reverse().forEach((target) => {
+    rmSync(target, { recursive: true, force: true });
+    console.log(`[Removed] ${target}`);
+  });
+};
+
+const copyFileSafe = (from, to) => {
+  const directory = path.dirname(to);
+  mkdirSync(directory, { recursive: true });
+  copyFileSync(from, to);
+  console.log(`[Copied] ${from} -> ${to}`);
+};
+
+const copyFiles = () => {
+  const filesToCopy = [
+    {
+      from: path.resolve(rootDirectory, 'rage-server-client/package.json'),
+      to: path.resolve(buildOutput, 'package.json')
+    },
+    {
+      from: path.resolve(rootDirectory, 'rage-server-client/conf.json'),
+      to: path.resolve(buildOutput, 'conf.json')
+    },
+    {
+      from: path.resolve(rootDirectory, '.env'),
+      to: path.resolve(buildOutput, '.env')
+    }
   ];
 
-  const removeablePaths = jetpack.find(buildOutput, {
-    matching: preserved.map((path) => `!${path}`),
-    directories: false
-  });
-
-  removeablePaths.forEach((path) => {
-    jetpack.remove(path);
-    console.log(`[Removed] ${path}`);
-  });
-}
-
-/**
- * Copy all static files they needed
- */
-function copyFiles() {
-  const prepareForCopy = [];
-
-  prepareForCopy.push(
-    {
-      from: jetpack.path('package.json'),
-      to: jetpack.path(buildOutput, 'package.json')
-    },
-    {
-      from: jetpack.path('.env'),
-      to: jetpack.path(buildOutput, '.env')
-    },
-    {
-      from: jetpack.path('conf.json'),
-      to: jetpack.path(buildOutput, 'conf.json')
+  filesToCopy.forEach(({ from, to }) => {
+    if (existsSync(from)) {
+      copyFileSafe(from, to);
+    } else {
+      console.error(`[Skipped] File not found: ${from}`);
     }
-  );
-
-  prepareForCopy.forEach((item) => {
-    jetpack.copy(item.from, item.to, { overwrite: true });
-    console.log(`[Copied] ${item.from} -> ${item.to}`);
   });
-}
+};
 
+// Setup
 cleanUp();
 copyFiles();
 
-// use terser only if it is the typescript compiler in use
-const terserMinify =
-  isProduction && !useSWC
-    ? terser({
-        keep_classnames: true,
-        keep_fnames: true,
-        output: {
-          comments: false
-        }
-      })
-    : [];
+const generateConfig = (isServerBuild) => {
+  const subDirectory = isServerBuild ? 'server' : 'client';
+  const input = path.resolve(sourcePath, `${subDirectory}/index.ts`);
+  const outputFile = path.resolve(buildOutput, isServerBuild ? 'packages/core/index.js' : 'client_packages/index.js');
+  const tsConfigPath = path.resolve(sourcePath, `${subDirectory}/tsconfig.json`);
+  const isProduction = process.env.NODE_ENV === 'prod';
 
-const generateConfig = (options) => {
-  const { isServer } = options;
-
-  const outputFile = isServer
-    ? resolvePath([buildOutput, 'packages', 'core', 'index.js'])
-    : resolvePath([buildOutput, 'client_packages', 'index.js']);
-
-  // for future server plugins
-  const serverPlugins = [];
-  const plugins = [terserMinify];
-
-  const external = [...builtinModules /*,...localInstalledPackages*/];
-  const tsConfigPath = resolvePath([sourcePath, isServer ? 'server' : 'client', 'tsconfig.json']);
-
-  return {
-    input: resolvePath([sourcePath, isServer ? 'server' : 'client', 'index.ts']),
+  return defineConfig({
+    input: input,
     output: {
       file: outputFile,
-      format: 'cjs',
-      sourcemap: !isProduction
+      format: 'cjs'
     },
+    external: [...builtinModules],
     plugins: [
-      tsPaths({ tsConfigPath }),
-      nodeResolvePlugin(),
-      jsonPlugin(),
-      commonjsPlugin(),
-      useSWC
-        ? swc({
-            tsconfig: tsConfigPath,
-            minify: isProduction,
-            sourceMaps: !isProduction,
-            jsc: {
-              target: 'es2020',
-              parser: {
-                syntax: 'typescript',
-                decorators: true
-              },
-              transform: {
-                legacyDecorator: true,
-                decoratorMetadata: true
-              },
-              externalHelpers: true,
-              keepClassNames: true,
-              loose: true
-            }
-          })
-        : typescriptPlugin({
-            check: false,
-            tsconfig: tsConfigPath
-          }),
-      isServer ? [...serverPlugins] : [],
-      ...plugins
-    ],
-    external: isServer ? [...external] : []
-  };
+      nodeResolve(),
+      commonjs(),
+      tsPaths({
+        tsConfigPath: tsConfigPath
+      }),
+      swc({
+        tsconfig: tsConfigPath,
+        minify: isProduction,
+        jsc: {
+          target: 'es2020',
+          parser: {
+            syntax: 'typescript',
+            decorators: true
+          },
+          transform: {
+            legacyDecorator: true,
+            decoratorMetadata: true
+          },
+          keepClassNames: isProduction,
+          externalHelpers: true,
+          loose: true
+        }
+      })
+    ]
+  });
 };
 
-export default [generateConfig({ isServer: true }), generateConfig({ isServer: false })];
+export default [generateConfig(true), generateConfig(false)];
