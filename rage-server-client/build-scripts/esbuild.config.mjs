@@ -1,12 +1,7 @@
 import path from 'node:path';
-import { builtinModules } from 'node:module';
 import { copyFileSync, existsSync, mkdirSync, readdirSync, rmSync, statSync } from 'node:fs';
-import { defineConfig } from 'rollup';
-import commonjs from '@rollup/plugin-commonjs';
-import nodeResolve from '@rollup/plugin-node-resolve';
 import { minimatch } from 'minimatch';
-import tsPaths from 'rollup-plugin-tsconfig-paths';
-import { swc } from 'rollup-plugin-swc3';
+import { build } from 'esbuild';
 
 const buildScriptsDirectory = path.resolve();
 const rootDirectory = path.resolve(buildScriptsDirectory, '../');
@@ -109,45 +104,20 @@ const copyFiles = () => {
 cleanUp();
 copyFiles();
 
-const generateConfig = (isServerBuild) => {
+const generateConfig = async (isServerBuild) => {
   const subDirectory = isServerBuild ? 'server' : 'client';
   const input = path.resolve(sourcePath, `${subDirectory}/index.ts`);
   const outputFile = path.resolve(buildOutput, isServerBuild ? 'packages/core/index.js' : 'client_packages/index.js');
-  const tsConfigPath = path.resolve(sourcePath, `${subDirectory}/tsconfig.json`);
-  const isProduction = process.env.NODE_ENV === 'prod';
 
-  return defineConfig({
-    input: input,
-    output: {
-      file: outputFile,
-      format: 'cjs'
-    },
-    external: [...builtinModules],
-    plugins: [
-      nodeResolve(),
-      commonjs(),
-      tsPaths({
-        tsConfigPath: tsConfigPath
-      }),
-      swc({
-        tsconfig: tsConfigPath,
-        minify: isProduction,
-        jsc: {
-          target: 'es2020',
-          parser: {
-            syntax: 'typescript',
-            decorators: true
-          },
-          transform: {
-            legacyDecorator: true,
-            decoratorMetadata: true
-          },
-          keepClassNames: isProduction,
-          externalHelpers: true,
-          loose: true
-        }
-      })
-    ]
+  await build({
+    bundle: true,
+    metafile: true,
+    platform: 'node',
+    entryPoints: [input],
+    outfile: outputFile,
+    sourcemap: false,
+    target: ['node14'],
+    minify: true
   });
 };
 
