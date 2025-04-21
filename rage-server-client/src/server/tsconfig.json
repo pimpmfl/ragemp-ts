@@ -2,7 +2,9 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "types": ["../../node_modules/@ragempcommunity/types-server"],
-    "rootDir": "./"
+    "rootDir": "./",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   },
   "include": ["./**/*.ts"]
 }
