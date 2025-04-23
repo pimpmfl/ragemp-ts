@@ -3,5 +3,4 @@ packages:
   - rage-cef
 
 onlyBuiltDependencies:
-  - '@swc/core'
   - esbuild

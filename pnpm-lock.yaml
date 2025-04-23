@@ -75,9 +75,6 @@ importers:
         specifier: 0.3.22
         version: 0.3.22(pg@8.14.1)(reflect-metadata@0.2.2)
     devDependencies:
-      '@eslint/js':
-        specifier: 9.25.0
-        version: 9.25.0
       '@ragempcommunity/types-client':
         specifier: 2.1.9
         version: 2.1.9
