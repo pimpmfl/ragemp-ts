@@ -63,7 +63,7 @@ Before starting, make sure you have the following:
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/pimpmfl/ragemp-ts.git
+git clone --branch v0.1.0-alpha https://github.com/pimpmfl/ragemp-ts.git
 ```
 
 2. Navigate into the project directory:
