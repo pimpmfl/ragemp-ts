@@ -13,7 +13,7 @@
   "dependencies": {
     "typeorm": "0.3.22",
     "reflect-metadata": "0.2.2",
-    "pg": "8.14.1"
+    "pg": "8.15.6"
   },
   "devDependencies": {
     "@ragempcommunity/types-client": "2.1.9",
