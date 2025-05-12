@@ -11,7 +11,7 @@
   "author": "pimpmfl",
   "license": "MIT",
   "dependencies": {
-    "typeorm": "0.3.22",
+    "typeorm": "0.3.23",
     "reflect-metadata": "0.2.2",
     "pg": "8.15.6"
   },
