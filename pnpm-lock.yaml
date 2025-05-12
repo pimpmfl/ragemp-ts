@@ -72,8 +72,8 @@ importers:
         specifier: 0.2.2
         version: 0.2.2
       typeorm:
-        specifier: 0.3.22
-        version: 0.3.22(pg@8.15.6)(reflect-metadata@0.2.2)
+        specifier: 0.3.23
+        version: 0.3.23(pg@8.15.6)(reflect-metadata@0.2.2)
     devDependencies:
       '@ragempcommunity/types-client':
         specifier: 2.1.9
@@ -2050,8 +2050,8 @@ packages:
     resolution: {integrity: sha512-OZs6gsjF4vMp32qrCbiVSkrFmXtG/AZhY3t0iAMrMBiAZyV9oALtXO8hsrHbMXF9x6L3grlFuwW2oAz7cav+Gw==}
     engines: {node: '>= 0.6'}
 
-  typeorm@0.3.22:
-    resolution: {integrity: sha512-P/Tsz3UpJ9+K0oryC0twK5PO27zejLYYwMsE8SISfZc1lVHX+ajigiOyWsKbuXpEFMjD9z7UjLzY3+ElVOMMDA==}
+  typeorm@0.3.23:
+    resolution: {integrity: sha512-CJUZWW7O5zZG0TA7bRpntJx97AvvQwsoSa1UgYlzTOtmkwODrqIyxP9wtzHpBssEKie5chnLiCVyxKNeYo65wQ==}
     engines: {node: '>=16.13.0'}
     hasBin: true
     peerDependencies:
@@ -4313,7 +4313,7 @@ snapshots:
       media-typer: 1.1.0
       mime-types: 3.0.1
 
-  typeorm@0.3.22(pg@8.15.6)(reflect-metadata@0.2.2):
+  typeorm@0.3.23(pg@8.15.6)(reflect-metadata@0.2.2):
     dependencies:
       '@sqltools/formatter': 1.2.5
       ansis: 3.17.0
