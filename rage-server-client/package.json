@@ -20,7 +20,7 @@
     "@ragempcommunity/types-server": "2.1.9",
     "@types/node": "22.14.1",
     "dotenv": "16.5.0",
-    "esbuild": "0.25.2",
+    "esbuild": "0.25.4",
     "eslint": "9.26.0",
     "eslint-config-prettier": "10.1.2",
     "eslint-plugin-prettier": "5.2.6",
