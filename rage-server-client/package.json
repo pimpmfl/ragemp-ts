@@ -18,7 +18,7 @@
   "devDependencies": {
     "@ragempcommunity/types-client": "2.1.9",
     "@ragempcommunity/types-server": "2.1.9",
-    "@types/node": "22.15.16",
+    "@types/node": "22.15.18",
     "dotenv": "16.5.0",
     "esbuild": "0.25.4",
     "eslint": "9.26.0",
