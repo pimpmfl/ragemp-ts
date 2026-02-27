@@ -11,7 +11,7 @@
   "author": "pimpmfl",
   "license": "MIT",
   "dependencies": {
-    "typeorm": "0.3.24",
+    "typeorm": "0.3.26",
     "reflect-metadata": "0.2.2",
     "pg": "8.16.0"
   },
@@ -24,7 +24,7 @@
     "eslint": "9.26.0",
     "eslint-config-prettier": "10.1.5",
     "eslint-plugin-prettier": "5.4.0",
-    "minimatch": "10.0.1",
+    "minimatch": "10.2.3",
     "prettier": "3.5.3",
     "typescript": "5.8.3",
     "typescript-eslint": "8.32.1"
